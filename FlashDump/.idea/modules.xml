@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FlashDump.iml" filepath="$PROJECT_DIR$/FlashDump.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlashDump.iml" filepath="$PROJECT_DIR$/FlashDump.iml" group="FlashDump" />
+      <module fileurl="file://$PROJECT_DIR$/../UILibrary/UILibrary.iml" filepath="$PROJECT_DIR$/../UILibrary/UILibrary.iml" group="FlashDump" />
     </modules>
   </component>
 </project>
