@@ -1,0 +1,20 @@
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath group: 'org.gradlefx', name:'gradlefx', version: '0.6'
+    }
+}
+
+apply plugin: 'gradlefx'
+flexHome='/Users/cdingpeng/air3.4'
+srcDirs = ['src']
+
+version = '1.0-SNAPSHOT'
+type = 'air'
+
+air {
+    storepass = 'gradlefx'
+    includeFileTrees = [fileTree(dir: 'sassets/', include: '*')]
+}

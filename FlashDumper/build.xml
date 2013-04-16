@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This build file provdes a close approximation of the build process 
+     and build settings inside Flash Builder, but it is not an exact copy.  
+     Please customize this file as necessary. -->
+<!-- Generated from project settings as of 8/20/12 4:31 PM -->
+<project name="FlashDumper" default="build" basedir=".">
+
+	<condition property="WORKSPACE" value="/Users/cdingpeng/git/FlashDumper" >
+        <not>
+            <isset property="WORKSPACE" />
+        </not>
+	</condition>
+	
+	<property name="FLEX_HOME" value="/Users/${user.name}/flex_sdk_4.6" />
+	<property name="SDK_VERSION" value="4.6.0.23201" />
+	<property name="ADT" value="${FLEX_HOME}/bin/adt" />
+	<property name="APP_NAME" value="FlashDumper" />
+
+	<taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef name="compc" classname="flex.ant.CompcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef name="html-wrapper" classname="flex.ant.HtmlWrapperTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef name="asdoc" classname="flex.ant.AsDocTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+
+	<property name="PROJECT_DIR" value="${WORKSPACE}/FlashDumper" />
+	<property name="SOURCE_DIR" value="${PROJECT_DIR}/src" />
+	<property name="OUTPUT_DIR" value="${PROJECT_DIR}/bin-debug" />
+	<property name="DOWNLOAD_DIR" value="/Users/${user.name}/Sites/update/flashdumper" />
+	<property name="LIBS_DIR" value="${PROJECT_DIR}/libs" />
+	<property name="LOCALE" value="en_US" />
+
+	<target name="build">
+		<antcall target="clean" />
+		<antcall target="compile" />
+		<antcall target="package"/>
+		<antcall target="asdoc" />
+	</target>
+
+	<target name="clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${OUTPUT_DIR}" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<mxmlc file="${SOURCE_DIR}/FlashDumper.mxml" output="${OUTPUT_DIR}/FlashDumper.swf" locale="${LOCALE}" static-rsls="false" accessible="true">
+			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml" />
+
+			<theme file="${FLEX_HOME}/frameworks/themes/Spark/spark.css" />
+
+			<source-path path-element="${SOURCE_DIR}" />
+
+			<!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+			<source-path path-element="${FLEX_HOME}/frameworks" />
+
+			<!-- List of SWC files or directories that contain SWC files. -->
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="libs" />
+				<include name="../bundles/{locale}" />
+			</compiler.library-path>
+
+			<library-path dir="${PROJECT_DIR}/libs" includes="*" append="true" />
+
+		</mxmlc>
+	</target>
+
+	<target name="package" description="Packages the build SWF file from a temp directory.">
+		<exec executable="${ADT}" dir="${OUTPUT_DIR}" failonerror="true">
+			<arg value="-package" />
+			<arg value="-storetype" />
+			<arg value="pkcs12" />
+			<arg value="-keystore" />
+			<arg value="${PROJECT_DIR}/zynga.p12" />
+			<arg value="-storepass" />
+			<arg value="zynga" />
+			<arg value='-target'/>
+			<arg value='native'/>
+			<arg value="${APP_NAME}.dmg" />
+			<arg value="${SOURCE_DIR}/${APP_NAME}-app.xml" />
+			<arg value="${APP_NAME}.swf" />
+
+            <arg value="-C"/>
+            <arg value="${PROJECT_DIR}/assets"/>
+            <arg value="."/>
+
+			<arg value="-C"/>
+			<arg value="${PROJECT_DIR}/src"/>
+			<arg value="png2atf"/>
+			<arg value="code-template.txt"/>
+			<arg value="generateTexture.sh"/>
+		</exec>
+		<copy tofile="${DOWNLOAD_DIR}/${APP_NAME}.dmg" file="${OUTPUT_DIR}/${APP_NAME}.dmg"/>
+	</target>
+
+	<target name="asdoc">
+		<asdoc output="${PROJECT_DIR}/asdoc" lenient="true" failonerror="false" window-title="ttt">
+			<compiler.source-path path-element="${SOURCE_DIR}" />
+			<doc-sources path-element="${SOURCE_DIR}" />
+			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml" />
+
+			<library-path dir="${LIBS_DIR}" includes="*" append="true" />
+		</asdoc>
+	</target>
+</project>

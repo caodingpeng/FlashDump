@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="444" height="382" borderVisible="true" dropShadowVisible="true"
+		 title="Error !">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			public var bitmapData:BitmapData;
+			[Bindable]
+			public var errorMsg:String;
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Image width="412" height="167" horizontalCenter="0" scaleMode="letterbox" smooth="true"
+			 source="{this.bitmapData}" verticalCenter="-81"/>
+	<s:TextArea x="15" y="185" width="412" height="110" borderVisible="false" editable="false"
+				enabled="true" skinClass="spark.skins.spark.TextAreaSkin" text="{this.errorMsg}"
+				textAlign="left" verticalAlign="middle"/>
+	<s:Button x="163" y="303" width="117" height="36" label="OK" click="button1_clickHandler(event)"/>
+</s:Panel>

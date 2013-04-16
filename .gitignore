@@ -1,2 +1,6 @@
 FlashDump/bin
 UILibrary/bin
+FlashDumper/asdoc
+FlashDumper/bin-debug
+tests
+FlashDumper/.gradle

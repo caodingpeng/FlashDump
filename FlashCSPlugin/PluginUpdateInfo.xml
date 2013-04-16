@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionUpdateInformation>
+    <version>1.5.0</version>
+    <download>http://www.mysite.com/extensions/myExtension.zxp</download>
+    <description url="http://www.mysite.com/extensions/myExt_15releasenotes.htm">
+        <![CDATA[
+The 1.5 version fixes known problems.<br>
+New features include the ability to download updates. ]]>
+    </description>
+</ExtensionUpdateInformation>

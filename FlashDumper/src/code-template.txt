@@ -1,0 +1,54 @@
+package com.zynga.ccg
+{
+	import com.zynga.share.uibuilder.WindowBase;
+	import com.zynga.share.uibuilder.AlignedTextLabel;
+	
+	import feathers.display.Image;
+	import feathers.display.Scale3Image;
+	import feathers.display.Sprite;
+	import feathers.controls.Button;
+	import starling.events.Event;
+	import feathers.controls.Check;
+	import feathers.controls.ProgressBar;
+	import feathers.controls.Radio;
+	import feathers.controls.text.BitmapFontTextRenderer;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextRenderer;
+	import feathers.core.ToggleGroup;
+	import feathers.text.BitmapFontTextFormat;
+	import feathers.textures.Scale3Textures;
+	
+	import com.zynga.share.uibuilder.LayoutSprite;
+	
+	import starling.core.Starling;
+	import starling.display.DisplayObject;
+	import starling.display.MovieClip;
+	import starling.events.Event;
+	import starling.text.BitmapFont;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
+
+	public class [ClassName] extends WindowBase
+	{
+		
+		public static const WINDOW_FILE_NAME:String = "${window_file}";
+		
+${variables}
+		
+		public function [ClassName]()
+		{
+			super(WINDOW_FILE_NAME);
+		}
+		
+		protected override function onWindowConstructionComplete():void
+		{
+			//Control init
+${inits}
+
+			//register events
+${events}
+		}
+		
+${methords}
+	}
+}
