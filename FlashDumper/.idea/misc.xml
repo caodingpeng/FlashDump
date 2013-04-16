@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="gradleHome" value="/opt/local/share/java/gradle" />
+  </component>
+  <component name="IdProvider" IDEtalkID="7264AE0F4D9974AD2BFC19EBE973891E" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="air3.4" project-jdk-type="Flex SDK Type (new)">
+    <output url="file://$PROJECT_DIR$/classes" />
+  </component>
+</project>
+

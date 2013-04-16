@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../CommonLib/CommonLib.iml" filepath="$PROJECT_DIR$/../CommonLib/CommonLib.iml" group="FlashDump" />
+      <module fileurl="file://$PROJECT_DIR$/../FlashCSPlugin/FlashCSPlugin.iml" filepath="$PROJECT_DIR$/../FlashCSPlugin/FlashCSPlugin.iml" group="FlashDump" />
+      <module fileurl="file://$PROJECT_DIR$/FlashDumper.iml" filepath="$PROJECT_DIR$/FlashDumper.iml" group="FlashDump" />
+    </modules>
+  </component>
+</project>
+
