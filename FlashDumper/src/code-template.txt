@@ -1,7 +1,7 @@
-package com.zynga.ccg
+package com.juicebeer.ccg
 {
-	import com.zynga.share.uibuilder.WindowBase;
-	import com.zynga.share.uibuilder.AlignedTextLabel;
+	import com.juicebeer.share.uibuilder.WindowBase;
+	import com.juicebeer.share.uibuilder.AlignedTextLabel;
 	
 	import feathers.display.Image;
 	import feathers.display.Scale3Image;
@@ -18,7 +18,7 @@ package com.zynga.ccg
 	import feathers.text.BitmapFontTextFormat;
 	import feathers.textures.Scale3Textures;
 	
-	import com.zynga.share.uibuilder.LayoutSprite;
+	import com.juicebeer.share.uibuilder.LayoutSprite;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;

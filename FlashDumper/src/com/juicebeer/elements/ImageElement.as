@@ -1,4 +1,4 @@
-package com.zynga.elements
+package com.juicebeer.elements
 {
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;

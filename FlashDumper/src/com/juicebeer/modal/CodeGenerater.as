@@ -1,19 +1,19 @@
-package com.zynga.modal
+package com.juicebeer.modal
 {
-	import com.zynga.elements.ButtonElement;
-	import com.zynga.elements.CheckElement;
-	import com.zynga.elements.ElementBase;
-	import com.zynga.elements.ImageElement;
-	import com.zynga.elements.LabelElement;
-	import com.zynga.elements.MovieClipElement;
-	import com.zynga.elements.PlaceHolderElement;
-	import com.zynga.elements.RadioElement;
-	import com.zynga.elements.RadioGroupElement;
-	import com.zynga.elements.Scale3Element;
-	import com.zynga.elements.Scale9Element;
-	import com.zynga.elements.SpriteElement;
-	import com.zynga.elements.ZButtonElement;
-	import com.zynga.elements.progressbar.ProgressbarElement;
+	import com.juicebeer.elements.ButtonElement;
+	import com.juicebeer.elements.CheckElement;
+	import com.juicebeer.elements.ElementBase;
+	import com.juicebeer.elements.ImageElement;
+	import com.juicebeer.elements.LabelElement;
+	import com.juicebeer.elements.MovieClipElement;
+	import com.juicebeer.elements.PlaceHolderElement;
+	import com.juicebeer.elements.RadioElement;
+	import com.juicebeer.elements.RadioGroupElement;
+	import com.juicebeer.elements.Scale3Element;
+	import com.juicebeer.elements.Scale9Element;
+	import com.juicebeer.elements.SpriteElement;
+	import com.juicebeer.elements.ZButtonElement;
+	import com.juicebeer.elements.progressbar.ProgressbarElement;
 	
 	import flash.display.Sprite;
 	import flash.filesystem.File;

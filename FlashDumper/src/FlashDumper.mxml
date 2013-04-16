@@ -14,146 +14,137 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import air.update.ApplicationUpdaterUI;
-			import air.update.events.DownloadErrorEvent;
-			import air.update.events.StatusUpdateErrorEvent;
-			import air.update.events.StatusUpdateEvent;
-			import air.update.events.UpdateEvent;
-			
-			import com.hexagonstar.util.debug.Debug;
-			import com.riaspace.nativeApplicationUpdater.NativeApplicationUpdater;
-			import com.zynga.component.Console;
-			import com.zynga.elements.SpriteElement;
-			import com.zynga.view.ImageToolTip;
-			
-			import fl.display.SafeLoader;
-			import fl.text.TLFTextField;
-			
-			import mx.controls.SWFLoader;
-			import mx.core.IUIComponent;
-			import mx.core.UIComponent;
-			import mx.events.FlexEvent;
-			import mx.events.ToolTipEvent;
-			import mx.managers.DragManager;
-			import mx.utils.StringUtil;
-			
-			import rl.dev.SWFConsole;
-			
-			import spark.core.SpriteVisualElement;
-			
-			private var loader:SafeLoader;
-			private var swf:MovieClip;
-			
-			public static const UPDATE_URL:String="http://mbj-apps/update/flashdumper/update.xml";
-			protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				//Helper.instance().logArea=this.logArea;
-				//Security.a
-				this.setApplicationVersion();
-				
-				// Configuration stuff - see update framework docs for more details
-				appUpdater.isNewerVersionFunction=this.isNewerVersion;
-				appUpdater.initialize();
-				
-			}
-			
-			protected function updater_initializedHandler(event:UpdateEvent):void
-			{
-				//this.appUpdater.checkForUpdate();
-				appUpdater.checkNow();
-			}
-			
-			protected function applicationCompleteHandler(event:FlexEvent):void
-			{
-				var console:SWFConsole=new SWFConsole(600,609);
-				this.logArea.addChild(console);
-				
-				Console.info(StringUtil.substitute('Welcome to use FlashDumper({0}).',this.appUpdater.currentVersion));
-				Console.info('If you meet any problems, please contact cdingpeng@zynga.com.');
-				Console.info('==============================================================');
-				
-				this.stage.quality = StageQuality.BEST;
-			}
-			
-			protected function onLoadComplete(event:Event):void
-			{
-				this.swf=event.currentTarget.content as MovieClip;
-				var visualElement:SpriteVisualElement=new SpriteVisualElement();
-				this.swf.visible=false;
-				visualElement.addChild(this.swf);
+        import air.update.ApplicationUpdaterUI;
+        import air.update.events.DownloadErrorEvent;
+        import air.update.events.StatusUpdateErrorEvent;
+        import air.update.events.StatusUpdateEvent;
+        import air.update.events.UpdateEvent;
 
-				this.addElement(visualElement);
-				Console.clear();
-				Console.log('Found '+swf.numChildren + " UI need to export.");
-				
-				Helper.instance().swf=this.swf;
-                Helper.findShareFile=false;
-				
-				var listdata:ArrayList=new ArrayList();
-				for(var i:int=0;i<swf.numChildren;i++)
-				{
-					
-					var ui:DisplayObject=swf.getChildAt(i) as DisplayObject;
+        import com.hexagonstar.util.debug.Debug;
+        import com.riaspace.nativeApplicationUpdater.NativeApplicationUpdater;
+        import com.juicebeer.component.Console;
+        import com.juicebeer.elements.SpriteElement;
+        import com.juicebeer.view.ImageToolTip;
 
-					var obj:Object=new Object();
-					obj.name=ui.name;
-					obj.bitmapData = Helper.drawBitmap(ui);
-				
-					
-					listdata.addItem(obj);
-				}
-				this.uilist.dataProvider=listdata;
-			}
-			
-			private function onError(event:ErrorEvent):void {
-				//Alert.show(event.toString());
-				
-			}
-			
-			private function onUpdate(event:UpdateEvent):void {
-				appUpdater.checkNow(); // Go check for an update now
-			}
-			
-			// Find the current version for our Label below
-			private function setApplicationVersion():void {
-				var appXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
-				var ns:Namespace = appXML.namespace();
-				foot.text = "Mobile Beijing (CCG), version " + appXML.ns::versionLabel;
-			}
-			
-			protected function pathBrowser_clickHandler(event:MouseEvent):void
-			{
-				var path:String="";
-				if(basepath.text.length>0)
-				{
-					path=basepath.text;
-				}
-				
-				var file:File=File.userDirectory.resolvePath(path);
-				file.addEventListener(Event.SELECT,onFileSelect);
-				file.browseForDirectory("select save dir");
-				
-			}
-			
-			private function onFileSelect(event:Event):void
-			{
-				var file:File=event.target as File;
-				this.basepath.text=file.nativePath;
-				
-				Helper.basePath=file.nativePath;
-			}
+        import fl.display.SafeLoader;
+        import fl.text.TLFTextField;
 
-            private function cbExportATFClicked():void
-            {
-                Helper.needExportATFiOS = cbExportATFiOS.selected;
-                Helper.needExportATFAndroid = cbExportATFAndroid.selected;
+        import mx.controls.SWFLoader;
+        import mx.core.IUIComponent;
+        import mx.core.UIComponent;
+        import mx.events.FlexEvent;
+        import mx.events.ToolTipEvent;
+        import mx.managers.DragManager;
+        import mx.utils.StringUtil;
+
+        import rl.dev.SWFConsole;
+
+        import spark.core.SpriteVisualElement;
+
+        private var loader:SafeLoader;
+        private var swf:MovieClip;
+
+        public static const UPDATE_URL:String = "http://mbj-apps/update/flashdumper/update.xml";
+
+        protected function creationCompleteHandler(event:FlexEvent):void {
+            //Helper.instance().logArea=this.logArea;
+            //Security.a
+            this.setApplicationVersion();
+
+            // Configuration stuff - see update framework docs for more details
+            appUpdater.isNewerVersionFunction = this.isNewerVersion;
+            appUpdater.initialize();
+
+        }
+
+        protected function updater_initializedHandler(event:UpdateEvent):void {
+            //this.appUpdater.checkForUpdate();
+            appUpdater.checkNow();
+        }
+
+        protected function applicationCompleteHandler(event:FlexEvent):void {
+            var console:SWFConsole = new SWFConsole(600, 609);
+            this.logArea.addChild(console);
+
+            Console.info(StringUtil.substitute('Welcome to use FlashDumper({0}).', this.appUpdater.currentVersion));
+            Console.info('If you meet any problems, please contact cdingpeng@zynga.com.');
+            Console.info('==============================================================');
+
+            this.stage.quality = StageQuality.BEST;
+        }
+
+        protected function onLoadComplete(event:Event):void {
+            this.swf = event.currentTarget.content as MovieClip;
+            var visualElement:SpriteVisualElement = new SpriteVisualElement();
+            this.swf.visible = false;
+            visualElement.addChild(this.swf);
+
+            this.addElement(visualElement);
+            Console.clear();
+            Console.log('Found ' + swf.numChildren + " UI need to export.");
+
+            Helper.instance().swf = this.swf;
+            Helper.findShareFile = false;
+
+            var listdata:ArrayList = new ArrayList();
+            for (var i:int = 0; i < swf.numChildren; i++) {
+
+                var ui:DisplayObject = swf.getChildAt(i) as DisplayObject;
+
+                var obj:Object = new Object();
+                obj.name = ui.name;
+                obj.bitmapData = Helper.drawBitmap(ui);
+
+
+                listdata.addItem(obj);
             }
-			
-			private function isNewerVersion(currentVersion:String, updateVersion:String):Boolean
-			{
-				return currentVersion < updateVersion;
-			}
-		]]>
+            this.uilist.dataProvider = listdata;
+        }
+
+        private function onError(event:ErrorEvent):void {
+            //Alert.show(event.toString());
+
+        }
+
+        private function onUpdate(event:UpdateEvent):void {
+            appUpdater.checkNow(); // Go check for an update now
+        }
+
+        // Find the current version for our Label below
+        private function setApplicationVersion():void {
+            var appXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
+            var ns:Namespace = appXML.namespace();
+            foot.text = "Mobile Beijing (CCG), version " + appXML.ns::versionLabel;
+        }
+
+        protected function pathBrowser_clickHandler(event:MouseEvent):void {
+            var path:String = "";
+            if (basepath.text.length > 0) {
+                path = basepath.text;
+            }
+
+            var file:File = File.userDirectory.resolvePath(path);
+            file.addEventListener(Event.SELECT, onFileSelect);
+            file.browseForDirectory("select save dir");
+
+        }
+
+        private function onFileSelect(event:Event):void {
+            var file:File = event.target as File;
+            this.basepath.text = file.nativePath;
+
+            Helper.basePath = file.nativePath;
+        }
+
+        private function cbExportATFClicked():void {
+            Helper.needExportATFiOS = cbExportATFiOS.selected;
+            Helper.needExportATFAndroid = cbExportATFAndroid.selected;
+        }
+
+        private function isNewerVersion(currentVersion:String, updateVersion:String):Boolean {
+            return currentVersion < updateVersion;
+        }
+        ]]>
 	</fx:Script>
 	<s:nativeDragEnter>
 		<![CDATA[
@@ -243,18 +234,16 @@
 								<s:GridItemRenderer>
 									<fx:Script>
 										<![CDATA[
-											import com.zynga.view.ImageToolTip;
-											
-											import mx.events.ToolTipEvent;
-											
-											protected function previewIcon_toolTipCreateHandler(event:ToolTipEvent):void
-											{
-												var imageTooltip:ImageToolTip=new ImageToolTip();
-												imageTooltip.source=this.data.bitmapData;
-												event.toolTip=imageTooltip;
-											}
-											
-										]]>
+                                        import com.juicebeer.view.ImageToolTip;
+
+                                        import mx.events.ToolTipEvent;
+
+                                        protected function previewIcon_toolTipCreateHandler(event:ToolTipEvent):void {
+                                            var imageTooltip:ImageToolTip = new ImageToolTip();
+                                            imageTooltip.source = this.data.bitmapData;
+                                            event.toolTip = imageTooltip;
+                                        }
+                                        ]]>
 									</fx:Script>
 									<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 										<s:Image id="previewIcon" source="@Embed(source='../assets/Preview.png')" scaleX="0.5" scaleY="0.5" toolTip=" q" toolTipCreate="previewIcon_toolTipCreateHandler(event)"/>
@@ -281,42 +270,41 @@
 									
 									<fx:Script>
 										<![CDATA[
-											import com.zynga.component.Console;
-											import com.zynga.elements.SpriteElement;
-											import com.zynga.modal.CodeGenerater;
-											import com.zynga.view.ErrorMessageView;
-											
-											import mx.core.Application;
-											import mx.core.FlexGlobals;
-											import mx.core.WindowedApplication;
-											import mx.managers.PopUpManager;
-											import mx.managers.SystemManager;
-											protected function export_clickHandler(event:MouseEvent):void
-											{
-                                                Helper.reloadSheetConfig();
+                                        import com.juicebeer.component.Console;
+                                        import com.juicebeer.elements.SpriteElement;
+                                        import com.juicebeer.modal.CodeGenerater;
+                                        import com.juicebeer.view.ErrorMessageView;
 
-												try{
-												var ui:DisplayObjectContainer=Helper.instance().swf.getChildByName(this.data.name) as DisplayObjectContainer;
-												Console.clear();
-												Console.log("Starting to export UI "+ui.name);
-												
-												var file:File=File.userDirectory.resolvePath(Helper.basePath+'/'+ui.name);
-												file.createDirectory();
-																	
-												Helper.instance().currentBasePath=Helper.basePath+'/'+ui.name;
-                                                Helper.instance().currentUIName=ui.name;
-																	
-												var obj:SpriteElement=new SpriteElement(ui);
-												
-												var expObj:Object=new Object();
-												expObj.root=obj.children;
-												expObj.x=obj.x;
-												expObj.y=obj.y;
-												expObj.width=obj.width;
-												expObj.height=obj.height;
-                                                var sheets:Array=[];
-                                                if(Helper.findShareFile)
-                                                {
+                                        import mx.core.Application;
+                                        import mx.core.FlexGlobals;
+                                        import mx.core.WindowedApplication;
+                                        import mx.managers.PopUpManager;
+                                        import mx.managers.SystemManager;
+
+                                        protected function export_clickHandler(event:MouseEvent):void {
+                                            Helper.reloadSheetConfig();
+
+                                            try {
+                                                var ui:DisplayObjectContainer = Helper.instance().swf.getChildByName(this.data.name) as DisplayObjectContainer;
+                                                Console.clear();
+                                                Console.log("Starting to export UI " + ui.name);
+
+                                                var file:File = File.userDirectory.resolvePath(Helper.basePath + '/' + ui.name);
+                                                file.createDirectory();
+
+                                                Helper.instance().currentBasePath = Helper.basePath + '/' + ui.name;
+                                                Helper.instance().currentUIName = ui.name;
+
+                                                var obj:SpriteElement = new SpriteElement(ui);
+
+                                                var expObj:Object = new Object();
+                                                expObj.root = obj.children;
+                                                expObj.x = obj.x;
+                                                expObj.y = obj.y;
+                                                expObj.width = obj.width;
+                                                expObj.height = obj.height;
+                                                var sheets:Array = [];
+                                                if (Helper.findShareFile) {
                                                     sheets.push('shareui/share');
                                                     sheets.push('shareui/share02');
                                                 }
@@ -331,10 +319,9 @@
                                                     }
                                                 }
                                                 if (pngFound) {
-                                                    if(Helper.sheetConfig && Helper.sheetConfig[ui.name])
-                                                    {
+                                                    if (Helper.sheetConfig && Helper.sheetConfig[ui.name]) {
                                                         sheets.push(Helper.sheetConfig[ui.name]);
-                                                    }else{
+                                                    } else {
                                                         sheets.push(ui.name);
                                                     }
                                                 } else {
@@ -344,95 +331,88 @@
 
                                                 }
 
-												expObj.spritesheets=sheets;
+                                                expObj.spritesheets = sheets;
 
-												var jsonStr:String=JSON.stringify(expObj,toJsonFunction,"\t");
+                                                var jsonStr:String = JSON.stringify(expObj, toJsonFunction, "\t");
 
-												Helper.saveStringToFile(jsonStr,ui.name+'.json');
-												Console.log("Finished exporting UI" + ui.name);
-												
-												if(NativeProcess.isSupported==false)
-												{
-													Console.log("NativeProcess.isSupported=false)");
-												}
-												
-												Console.info("========================================");
-												Console.info("            Source code Generation          ");
-												Console.info("========================================");
-												var source:CodeGenerater=new CodeGenerater(obj,ui.name);
-												
-												var outputDir:File=File.applicationDirectory.resolvePath(Helper.instance().currentBasePath+'/output');
-												if(outputDir.exists==false)
-												{
-													outputDir.createDirectory();
-												}
+                                                Helper.saveStringToFile(jsonStr, ui.name + '.json');
+                                                Console.log("Finished exporting UI" + ui.name);
 
-												Helper.saveStringToFile(source.source,ui.name+'.as',Helper.instance().currentBasePath);
-												Console.log("Source code generation finished.");
+                                                if (NativeProcess.isSupported == false) {
+                                                    Console.log("NativeProcess.isSupported=false)");
+                                                }
 
-                                                if(Capabilities.os.toLowerCase().indexOf("mac")<0){
+                                                Console.info("========================================");
+                                                Console.info("            Source code Generation          ");
+                                                Console.info("========================================");
+                                                var source:CodeGenerater = new CodeGenerater(obj, ui.name);
+
+                                                var outputDir:File = File.applicationDirectory.resolvePath(Helper.instance().currentBasePath + '/output');
+                                                if (outputDir.exists == false) {
+                                                    outputDir.createDirectory();
+                                                }
+
+                                                Helper.saveStringToFile(source.source, ui.name + '.as', Helper.instance().currentBasePath);
+                                                Console.log("Source code generation finished.");
+
+                                                if (Capabilities.os.toLowerCase().indexOf("mac") < 0) {
                                                     Console.log("OS is not Mac, don't generate texture");
                                                     return;
                                                 }
 
-												Console.info("========================================");
-												Console.info("            Texture Generation          ");
-												Console.info("========================================");
-												var params:Vector.<String>=new Vector.<String>();
-												params.push('-l');
-												params.push(File.applicationDirectory.resolvePath('generateTexture.sh').nativePath);
-												params.push(ui.name+'.png');
-												params.push(ui.name+'.xml');
-												params.push(Helper.instance().currentBasePath);
-												params.push(File.applicationDirectory.nativePath);
-                                                if(Helper.needExportATFiOS){
+                                                Console.info("========================================");
+                                                Console.info("            Texture Generation          ");
+                                                Console.info("========================================");
+                                                var params:Vector.<String> = new Vector.<String>();
+                                                params.push('-l');
+                                                params.push(File.applicationDirectory.resolvePath('generateTexture.sh').nativePath);
+                                                params.push(ui.name + '.png');
+                                                params.push(ui.name + '.xml');
+                                                params.push(Helper.instance().currentBasePath);
+                                                params.push(File.applicationDirectory.nativePath);
+                                                if (Helper.needExportATFiOS) {
                                                     params.push("atf-ios");
                                                 }
 
-                                                if(Helper.needExportATFAndroid){
+                                                if (Helper.needExportATFAndroid) {
                                                     params.push("atf-android");
                                                 }
 
-												Helper.nativeCall(params,onOutputData,null,onExit);
-												}catch(e:Error){
-													Console.error(e.message);
-													Console.warning("Export  abort");
+                                                Helper.nativeCall(params, onOutputData, null, onExit);
+                                            } catch (e:Error) {
+                                                Console.error(e.message);
+                                                Console.warning("Export  abort");
 
-													var em:ErrorMessageView=PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,ErrorMessageView,true) as ErrorMessageView;
-													em.bitmapData=Helper.instance().errorDisplayObjectSnapshot;
-													em.errorMsg=e.message;
+                                                var em:ErrorMessageView = PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject, ErrorMessageView, true) as ErrorMessageView;
+                                                em.bitmapData = Helper.instance().errorDisplayObjectSnapshot;
+                                                em.errorMsg = e.message;
 
-													PopUpManager.centerPopUp(em);
-												}
-											}
-											
-											private function onOutputData(event:ProgressEvent):void
-											{
-												var process:NativeProcess=event.target as NativeProcess;
-												var output:String=process.standardOutput.readUTFBytes(process.standardOutput.bytesAvailable);
-												var arr:Array=output.split("\n");
-												
-												for(var i:int=0;i<arr.length;i++)
-												{
-													Console.log(arr[i]);
-												}
-											}
-											
-											public function onExit(event:NativeProcessExitEvent):void
-											{
-												Console.log("Process exited with " + event.exitCode.toString());
-											}
-											
-											private function toJsonFunction(key:String,value:Object):*
-											{
-												if(value==null)
-												{
-													return undefined;
-												}
-												return value;
-												var c:Button
-											}
-										]]>
+                                                PopUpManager.centerPopUp(em);
+                                            }
+                                        }
+
+                                        private function onOutputData(event:ProgressEvent):void {
+                                            var process:NativeProcess = event.target as NativeProcess;
+                                            var output:String = process.standardOutput.readUTFBytes(process.standardOutput.bytesAvailable);
+                                            var arr:Array = output.split("\n");
+
+                                            for (var i:int = 0; i < arr.length; i++) {
+                                                Console.log(arr[i]);
+                                            }
+                                        }
+
+                                        public function onExit(event:NativeProcessExitEvent):void {
+                                            Console.log("Process exited with " + event.exitCode.toString());
+                                        }
+
+                                        private function toJsonFunction(key:String, value:Object):* {
+                                            if (value == null) {
+                                                return undefined;
+                                            }
+                                            return value;
+                                            var c:Button
+                                        }
+                                        ]]>
 									</fx:Script>
 									<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 										<s:Button id="export" label="export" click="export_clickHandler(event)"/>

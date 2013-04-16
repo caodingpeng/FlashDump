@@ -1,6 +1,6 @@
-package com.zynga.elements
+package com.juicebeer.elements
 {
-	import com.zynga.component.Console;
+	import com.juicebeer.component.Console;
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;

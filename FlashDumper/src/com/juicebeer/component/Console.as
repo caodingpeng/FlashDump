@@ -1,4 +1,4 @@
-package com.zynga.component
+package com.juicebeer.component
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;

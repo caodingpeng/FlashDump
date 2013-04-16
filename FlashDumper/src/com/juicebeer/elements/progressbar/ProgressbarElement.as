@@ -1,10 +1,10 @@
 /**
  * 
  */
-package com.zynga.elements.progressbar
+package com.juicebeer.elements.progressbar
 {
-	import com.zynga.component.Console;
-	import com.zynga.elements.ElementBase;
+	import com.juicebeer.component.Console;
+	import com.juicebeer.elements.ElementBase;
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;

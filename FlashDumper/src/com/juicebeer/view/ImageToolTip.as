@@ -1,4 +1,4 @@
-package com.zynga.view
+package com.juicebeer.view
 {
 	import mx.core.IToolTip;
 	

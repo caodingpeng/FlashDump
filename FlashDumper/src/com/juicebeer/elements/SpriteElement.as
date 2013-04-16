@@ -1,9 +1,9 @@
-package com.zynga.elements
+package com.juicebeer.elements
 {	
-	import com.zynga.component.Console;
-    import com.zynga.elements.Scale9Element;
-    import com.zynga.elements.progressbar.HorizonalProgressbarElement;
-	import com.zynga.elements.progressbar.VerticalProgressbarElement;
+	import com.juicebeer.component.Console;
+    import com.juicebeer.elements.Scale9Element;
+    import com.juicebeer.elements.progressbar.HorizonalProgressbarElement;
+	import com.juicebeer.elements.progressbar.VerticalProgressbarElement;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;

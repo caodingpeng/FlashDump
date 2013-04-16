@@ -5,7 +5,7 @@
  * Time: 1:51 PM
  *
  */
-package com.zynga.elements {
+package com.juicebeer.elements {
     import flash.display.DisplayObject;
     import flash.display.DisplayObject;
     import flash.display.MovieClip;
