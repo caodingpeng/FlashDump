@@ -4,3 +4,6 @@ FlashDumper/asdoc
 FlashDumper/bin-debug
 tests
 FlashDumper/.gradle
+CommonLib/bin
+FlashCSPlugin/bin
+FlashDumper/bin
